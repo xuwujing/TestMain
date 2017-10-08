@@ -1,4 +1,4 @@
-package com.test.httptest;
+package com.test.httpTest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

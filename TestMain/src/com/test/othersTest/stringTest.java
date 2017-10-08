@@ -16,6 +16,7 @@ public class stringTest {
 	        String s4 = "ming";
 	        String s5 = "Program" + "ming";
 	        String s6 = s3 + s4;
+	        String s7 = new String(s1);
 	        // 引用地址不同  equals相同    
 	        System.out.println(s1 == s2); //false
 	        // s5 在编译之前就可以确认s5=Programming 因此相等
@@ -24,6 +25,8 @@ public class stringTest {
 	        System.out.println(s1 == s6); //false
 	        System.out.println(s1 == s6.intern()); //true
 	        System.out.println(s2 == s2.intern()); //false
+	        System.out.println(s7==s1);       //false
+	        System.out.println(s7.equals(s1)); //true
 	        
 	        
 	        String ab="ab";

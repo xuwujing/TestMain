@@ -67,14 +67,14 @@ public class MyTools implements java.io.Serializable{
 
 	/**
 	 * 字符串反转
-	 * @param originStr
+	 * @param str
 	 * @return
 	 */
-	public static String reverse(String originStr) {
-        if(originStr == null || originStr.length() <= 1){ 
-            return originStr;
+	public static String reverse(String str) {
+        if(str == null || str.length() <= 1){ 
+            return str;
         }
-        return reverse(originStr.substring(1)) + originStr.charAt(0);
+        return reverse(str.substring(1)) + str.charAt(0);
     }
 	
 	/**

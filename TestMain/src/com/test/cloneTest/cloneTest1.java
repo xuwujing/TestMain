@@ -8,7 +8,7 @@ package com.test.cloneTest;
 * @date 2017-7-24
  */
 
-//被复制的类需要实现Clonenable接口
+//被复制的类需要实现Cloneable接口 重写Object方法
 class Student implements Cloneable{  
     private int number;  
 

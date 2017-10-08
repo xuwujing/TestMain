@@ -32,9 +32,11 @@ public class myToolsTest {
         String str="";
         String str1=null;
         String str2="abc";
+        String str3=" ";
         System.out.println(isNull(str));//true
         System.out.println(isNull(str1));//true
         System.out.println(isNull(str2));//false
+        System.out.println(isNull(str3));//false
         
         List list=new ArrayList();
         List list1=null;
@@ -46,9 +48,13 @@ public class myToolsTest {
  //       System.out.println(isEmpty1(list1));//直接报错
         System.out.println(isNull(list2));//false
         
+        /**
+         * 时间相关
+         */
         System.out.println(getNowTime(""));  //2015-10-01 11:08:44
         System.out.println(getNowTime("yyyyMMdd"));//20151001
-        
+        System.out.println(Calendar.getInstance().getTime());
+        System.out.println(new Date());
         System.out.println(getNowTime(""));  //2015-10-01 11:59:24
         System.out.println(getTimeAddmi(10,null,null));//2015-10-01 12:09:24
         System.out.println(getTimeAddmi(20,"2015-10-01 11:08:44","yyyy-MM-dd HH:mm:ss"));//2015-10-01 11:28:44
@@ -68,9 +74,17 @@ public class myToolsTest {
         System.out.println(json.getString("d"));
         System.out.println(json.get("d"));
         
+        /**
+         * 格式
+         */
         double d=5.32642;
         String df="#.00";
         System.out.println(doubleformat(d, df));
+        
+        /**
+         * Math
+         */
+        System.out.println("Math.pow :"+ Math.pow(2, 10)); //2的10次方
         
         /**
          * 替换
@@ -134,11 +148,8 @@ public class myToolsTest {
 	 * 判断String类型的数据是否为空
 	 * @return Boolean
 	 */
-	public static Boolean isNull(String data){
-		if(null==data||"".equals(data)){
-			return true;
-		}
-		return false;
+	public static boolean isNull(String data){
+		return null==data||"".equals(data);
 	}
 	
 	/**
@@ -146,26 +157,14 @@ public class myToolsTest {
 	 * @return Boolean
 	 */
 	@SuppressWarnings("rawtypes")
-	public static Boolean isNull(List list){
-		if(list==null||list.size()==0){
-			return true;
-		}
-		return false;
+	public static boolean isNull(List list){
+		return list==null||list.size()==0;
 	}
 	
-	public static Boolean isEmpty(List list){
-		if(list==null||list.size()==0){
-			return true;
-		}
-		return false;
+	public static boolean isEmpty(List list){
+		return list==null||list.size()==0;
 	}
 	
-	public static Boolean isEmpty1(List list){
-		if(list.size()==0||list==null){
-			return true;
-		}
-		return false;
-	}
 	
 	public static String getNowTime(String format){
 		if(null==format||"".equals(format)){//如果没有设置格式使用默认格式
@@ -298,7 +297,6 @@ public class myToolsTest {
         if(originStr == null || originStr.length() <= 1){ 
             return originStr;
         }
-        System.out.println(originStr.substring(1)+",-------"+originStr.charAt(0));
         return reverse(originStr.substring(1)) + originStr.charAt(0);
     }
 	
