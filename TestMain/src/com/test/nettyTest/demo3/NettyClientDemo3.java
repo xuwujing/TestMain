@@ -14,8 +14,8 @@ import java.io.IOException;
 
 /**
  * 
-* Title: NettyClientDemo2
-* Description: Netty客户端  
+* Title: NettyClientDemo3
+* Description: Netty客户端  测试自定义解码器
 * Version:1.0.0  
 * @author pancm
 * @date 2017年9月21日

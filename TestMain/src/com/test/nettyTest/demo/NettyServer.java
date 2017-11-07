@@ -30,7 +30,7 @@ public class NettyServer {
 	            b.childHandler(new NettyServerFilter()); //设置过滤器
 	            // 服务器绑定端口监听
 	            ChannelFuture f = b.bind(port).sync();
-	            System.out.println("服务端启动成功...");
+	            System.out.println("服务端启动成功,端口是:"+port);
 	            // 监听服务器关闭监听
 	            f.channel().closeFuture().sync();
 	        } finally {

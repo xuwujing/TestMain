@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
-encoding//src/com/codetest/TestBoolean.java=GBK
-encoding//src/com/test/nioTest/Niotest.java=GBK
-encoding//src/com/test/othersTest/exTest.java=GBK
+encoding//src/com/codetest/TestBoolean.java=UTF-8
+encoding//src/com/test/jdbcTest/ConnectionOracle.java=UTF-8
+encoding//src/com/test/othersTest/exTest.java=UTF-8
+encoding/<project>=UTF-8
 encoding/test.properties=UTF-8

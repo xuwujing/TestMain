@@ -133,8 +133,9 @@ public class JSONUtil {
 	}
 
 	public static String string2json(String s) {
-		if (s == null)
+		if (s == null) {
 			return "";
+		}
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < s.length(); i++) {
 			char ch = s.charAt(i);

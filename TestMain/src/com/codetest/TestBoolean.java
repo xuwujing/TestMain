@@ -1,8 +1,8 @@
 package com.codetest;
 /**
  * @author ZERO
- * @version 2017-4-17 ÏÂÎç6:05:37
- * ÀàËµÃ÷ booleanÔ´Âë¼ì²â
+ * @version 2017-4-17 ä¸‹åˆ6:05:37
+ * ç±»è¯´æ˜ booleanæºç æ£€æµ‹
  */
 public class TestBoolean {
 
@@ -11,20 +11,20 @@ public class TestBoolean {
 	 */
 	public static void main(String[] args) {
 		 {
-		        Boolean bool1 = Boolean.valueOf(true);       //ÕâÀï¾ùÊ¹ÓÃvalueof´´½¨¶ÔÏó£¬new´´½¨µÄBoolean¶ÔÏóÊÇ²»¶ÏµÄĞÂ´´½¨Ò»¸öÊµÀı¶ÔÏó£¬¶øvalueOfÔòÊÇ·µ»ØBooleanÀàÀïµÄ¾²Ì¬³ÉÔ±±äÁ¿
-		        Boolean bool2 = Boolean.valueOf("True");    //ÕâÀïÉÏÒ»¾ä´úÂëÑéÖ¤Ê¹ÓÃString±äÁ¿×÷Îª²ÎÊıÊ±£¬²»Çø·Ö´óĞ¡Ğ´µÄ¡£
+		        Boolean bool1 = Boolean.valueOf(true);       //è¿™é‡Œå‡ä½¿ç”¨valueofåˆ›å»ºå¯¹è±¡ï¼Œnewåˆ›å»ºçš„Booleanå¯¹è±¡æ˜¯ä¸æ–­çš„æ–°åˆ›å»ºä¸€ä¸ªå®ä¾‹å¯¹è±¡ï¼Œè€ŒvalueOfåˆ™æ˜¯è¿”å›Booleanç±»é‡Œçš„é™æ€æˆå‘˜å˜é‡
+		        Boolean bool2 = Boolean.valueOf("True");    //è¿™é‡Œä¸Šä¸€å¥ä»£ç éªŒè¯ä½¿ç”¨Stringå˜é‡ä½œä¸ºå‚æ•°æ—¶ï¼Œä¸åŒºåˆ†å¤§å°å†™çš„ã€‚
 		        Boolean bool3 = Boolean.valueOf("ASD");
 		        boolean x1 = bool1.booleanValue();
 		        boolean x2 = bool2.booleanValue();
 		        System.out.println("bool1:" + x1 + ",bool2:" + x2 + ",bool3:" + bool3);
-		        boolean x3 = bool1.equals(bool2);       //Õâ¸ö¾ÍÊÇÑéÖ¤ÏíÔªÄ£Ê½£¬Ê¹ÓÃµÄÊÇÍ¬Ò»¸ö¶ÔÏó
-		        boolean x4 = bool1.equals(bool3);       //¿Ï¶¨²»ÊÇÍ¬Ò»¶ÔÏóÀ²¡£
+		        boolean x3 = bool1.equals(bool2);       //è¿™ä¸ªå°±æ˜¯éªŒè¯äº«å…ƒæ¨¡å¼ï¼Œä½¿ç”¨çš„æ˜¯åŒä¸€ä¸ªå¯¹è±¡
+		        boolean x4 = bool1.equals(bool3);       //è‚¯å®šä¸æ˜¯åŒä¸€å¯¹è±¡å•¦ã€‚
 		        System.out.println("bool1.equals(bool2):" + x3 + ",bool1.equals(bool3):" + x4);
-		        String str1 = Boolean.toString(bool1);      //¿É¼ûBoolean¶ÔÏóÊÇ¿ÉÒÔ×ª»»³É×Ö·ûµÄ
+		        String str1 = Boolean.toString(bool1);      //å¯è§Booleanå¯¹è±¡æ˜¯å¯ä»¥è½¬æ¢æˆå­—ç¬¦çš„
 		        String str2 = Boolean.toString(false);      
 		        String str3 = bool3.toString();
 		        System.out.println("bool1:" + str1 + ",str2:" + str2 + ",bool3:" + str3);
-		        boolean x5 = Boolean.parseBoolean("ASD");         //Ô´ÂëÊÇÖ±½ÓÅĞ¶ÏÈ»ºóÓëtrue¶Ô±È£¬Òò´Ë´òÓ¡Îªfalse
+		        boolean x5 = Boolean.parseBoolean("ASD");         //æºç æ˜¯ç›´æ¥åˆ¤æ–­ç„¶åä¸trueå¯¹æ¯”ï¼Œå› æ­¤æ‰“å°ä¸ºfalse
 		        System.out.println(x5);
 		    }
 

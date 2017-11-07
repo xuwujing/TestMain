@@ -8,7 +8,6 @@ import io.netty.handler.codec.MessageToByteEncoder;
 
 /**
  * 
-* Title: NettyEncoder
 * Description:Netty自定义编码器 
 * Version:1.0.0  
 * @author pancm
@@ -19,7 +18,7 @@ public class NettyEncoder extends MessageToByteEncoder<NettyMsg> {
     @Override  
     protected void encode(ChannelHandlerContext ctx, NettyMsg msg, ByteBuf out) throws Exception {  
         if(null == msg){  
-            throw new Exception("msg is null");  
+            throw new Exception("消息不能为空!");  
         }  
           
         String body = msg.getBody();  

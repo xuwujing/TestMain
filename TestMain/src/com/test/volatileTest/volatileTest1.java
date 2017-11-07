@@ -50,14 +50,17 @@ public class volatileTest1 {
 		 final volatileTest1 test = new volatileTest1();
 	        for(int i=0;i<10;i++){
 	            new Thread(){
-	                public void run() {
-	                    for(int j=0;j<1000;j++)  
-	                        test.increase();
+	                @Override
+					public void run() {
+	                    for(int j=0;j<1000;j++) {
+							test.increase();
+						}
 	                };
 	            }.start();
 	        }
-	        while(Thread.activeCount()>1)  //保证前面的线程都执行完
-	            Thread.yield();
+	        while(Thread.activeCount()>1) {
+				Thread.yield();
+			}
 	        System.out.println(test.inv); //数据小于 10000  例如:9303,9068
 	}
 	
@@ -68,14 +71,17 @@ public class volatileTest1 {
 		 final volatileTest1 test = new volatileTest1();
 	        for(int i=0;i<10;i++){
 	            new Thread(){
-	                public void run() {
-	                    for(int j=0;j<1000;j++)  
-	                        test.insrease();
+	                @Override
+					public void run() {
+	                    for(int j=0;j<1000;j++) {
+							test.insrease();
+						}
 	                };
 	            }.start();
 	        }
-	        while(Thread.activeCount()>1)  //保证前面的线程都执行完
-	            Thread.yield();
+	        while(Thread.activeCount()>1) {
+				Thread.yield();
+			}
 	        System.out.println(test.ins); // 10000   保证了原子性
 	}
 	
@@ -86,14 +92,17 @@ public class volatileTest1 {
 		 final volatileTest1 test = new volatileTest1();
 	        for(int i=0;i<10;i++){
 	            new Thread(){
-	                public void run() {
-	                    for(int j=0;j<1000;j++)  
-	                        test.inlrease();
+	                @Override
+					public void run() {
+	                    for(int j=0;j<1000;j++) {
+							test.inlrease();
+						}
 	                };
 	            }.start();
 	        }
-	        while(Thread.activeCount()>1)  //保证前面的线程都执行完
-	            Thread.yield();
+	        while(Thread.activeCount()>1) {
+				Thread.yield();
+			}
 	        System.out.println(test.inl); //10000  保证了原子性
 	}
 	

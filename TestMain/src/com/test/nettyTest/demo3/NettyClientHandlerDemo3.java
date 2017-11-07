@@ -5,7 +5,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 /**
  * 
-* Title: CustomClientHandler
 * Description: 
 * Version:1.0.0  
 * @author pancm

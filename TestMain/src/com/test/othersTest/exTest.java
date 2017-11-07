@@ -4,9 +4,10 @@ package com.test.othersTest;
 
 /**
  * @author ZERO
- * @date 2017-4-24 下午3:53:28
- * @Description  继承、static静态块、++测试
+ * @date 2017-4-24 
+ * @Description  缁ф壙娴嬭瘯
  */
+@SuppressWarnings({ "serial", "unused" })
 public class exTest extends Exception{
 	static{
 		int x=5;
@@ -28,7 +29,7 @@ public class exTest extends Exception{
 	}
    
 	public static void my(){
-		y=x++ + ++x;   //++x先对x做自加运算，在使用x的值。x++是先使用x的值再自加运算
+		y=x++ + ++x;   
 		System.out.println("y:"+y);
 	}
 			

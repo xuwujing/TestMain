@@ -13,8 +13,7 @@ import java.net.InetSocketAddress;
  
 /**
  * 
-* Title: CustomServer
-* Description:  Netty 服务端  
+* Description:  Netty 服务端    测试自定义解码器
 * Version:1.0.0  
 * @author pancm
 * @date 2017年9月21日
@@ -38,7 +37,8 @@ public class NettyServerDemo3 {
                     .childHandler(new ChannelInitializer<SocketChannel>() {  
                           
                         protected void initChannel(SocketChannel ch) throws Exception {  
-                             ch.pipeline().addLast(new NettyDecoder(MAX_FRAME_LENGTH,LENGTH_FIELD_LENGTH,LENGTH_FIELD_OFFSET,LENGTH_ADJUSTMENT,INITIAL_BYTES_TO_STRIP,false));  
+                             ch.pipeline().addLast(new NettyDecoder2(MAX_FRAME_LENGTH,LENGTH_FIELD_LENGTH,LENGTH_FIELD_OFFSET,LENGTH_ADJUSTMENT,INITIAL_BYTES_TO_STRIP,false));  
+//                             ch.pipeline().addLast(new NettyDecoder(MAX_FRAME_LENGTH,LENGTH_FIELD_LENGTH,LENGTH_FIELD_OFFSET,LENGTH_ADJUSTMENT,INITIAL_BYTES_TO_STRIP,false));  
                              ch.pipeline().addLast(new NettyServerHandlerDemo3());  
                         };  
                           
@@ -47,7 +47,7 @@ public class NettyServerDemo3 {
              // 绑定端口，开始接收进来的连接  
              ChannelFuture future = sbs.bind(port).sync();    
                
-             System.out.println("Server start listen at " + port );  
+             System.out.println("Netty服务端成功启动！端口为: " + port );  
              future.channel().closeFuture().sync();  
         } catch (Exception e) {  
             bossGroup.shutdownGracefully();  

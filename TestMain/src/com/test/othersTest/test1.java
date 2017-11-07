@@ -198,14 +198,18 @@ public class test1 {
     {
         if(len==1)//最后一个元素
         {     System.out.println("ary[index]:"+ary[index]+"  value:"+value);
-            if (ary[index]==value)return index;//成功查询返回索引
+            if (ary[index]==value)
+			 {
+				return index;//成功查询返回索引
+			}
             return -1;//失败，返回-1
         }
         //如果长度大于1，进行折半递归查询
         int half=len/2;
         //检查被查值是否大于上半部分最后一个值，如果是则递归查询后半部分
-        if(value>ary[index+half-1])
-            return sind(ary,index+half,half,value);
+        if(value>ary[index+half-1]) {
+			return sind(ary,index+half,half,value);
+		}
         //否则递归查询上半部分
         return sind(ary,index,half,value);
     }
@@ -256,8 +260,9 @@ public class test1 {
 	}
 	
 	public static int bj1(int i,int j){	
-		if(i>j)
-		return i;
+		if(i>j) {
+			return i;
+		}
 		return j;	
 	}
 	

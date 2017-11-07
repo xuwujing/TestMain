@@ -4,6 +4,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.net.InetAddress;
+import java.util.Date;
 
 import com.util.MyTools;
 
@@ -28,7 +29,8 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
 			ctx.close();
 		}
 		// 返回客户端消息
-		ctx.writeAndFlush("收到消息:"+ msg+",当前的时间是:"+MyTools.getNowTime("")+"\n");
+//		ctx.writeAndFlush("收到消息:"+ msg+",当前的时间是:"+MyTools.getNowTime("")+"\n");
+		ctx.writeAndFlush("收到消息:"+ msg+",当前的时间是:"+new Date());
 	}
 
 	/*
@@ -37,7 +39,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		System.out.println("连接的客户端地址:" + ctx.channel().remoteAddress());
-		ctx.writeAndFlush("客户端"+ InetAddress.getLocalHost().getHostName() + "成功与服务端建立连接！ \n");
+		ctx.writeAndFlush("客户端"+ InetAddress.getLocalHost().getHostName() + "成功与服务端建立连接！ ");
 		super.channelActive(ctx);
 	}
 }

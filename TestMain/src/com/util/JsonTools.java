@@ -41,7 +41,7 @@ public class JsonTools {
 	 * @param t
 	 * @return
 	 */
-	public static <T> JSONObject toJson(Class<T> t){
+	public static  JSONObject toJson(Object t){
 		return (JSONObject) JSON.toJSON(t);
 	}
 	
@@ -54,7 +54,7 @@ public class JsonTools {
 	 */
 	@SuppressWarnings("rawtypes")
 	public static Map toMap(String json) {
-		if (json == null || "".equals(json)) {
+		if (json == null || "".equals(json.trim())) {
 			return new HashMap();
 		}
 		return JSON.parseObject(json, HashMap.class);

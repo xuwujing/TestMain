@@ -24,7 +24,7 @@ public class NettyClientFilter extends ChannelInitializer<SocketChannel> {
         /*
          * 解码和编码，应和服务端一致
          * */
-        ph.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
+//        ph.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
         ph.addLast("decoder", new StringDecoder());
         ph.addLast("encoder", new StringEncoder());
         ph.addLast("handler", new NettyClientHandler()); //客户端的逻辑

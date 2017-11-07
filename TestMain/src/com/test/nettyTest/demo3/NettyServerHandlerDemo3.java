@@ -5,7 +5,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
  
 /**
  * 
-* Title: CustomServerHandler
 * Description:服务端业务逻辑处理类 
 * Version:1.0.0  
 * @author pancm
@@ -17,7 +16,7 @@ public class NettyServerHandlerDemo3 extends SimpleChannelInboundHandler<Object>
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {  
         if(msg instanceof NettyMsg) {  
             NettyMsg customMsg = (NettyMsg)msg;  
-            System.out.println("Client->Server:"+ctx.channel().remoteAddress()+" send "+customMsg.getBody());  
+            System.out.println("接受的数据:"+ctx.channel().remoteAddress()+" send "+customMsg.getBody());  
         }  
           
     }  

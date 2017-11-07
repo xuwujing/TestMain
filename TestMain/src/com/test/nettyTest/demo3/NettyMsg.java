@@ -2,7 +2,6 @@ package com.test.nettyTest.demo3;
 
 /**
  * 
-* Title: NettyMsg
 * Description: Netty 自定义消息 
 * Version:1.0.0  
 * @author pancm
@@ -10,6 +9,7 @@ package com.test.nettyTest.demo3;
  */
 public class NettyMsg {  
     
+
 	/** 类型  系统编号 0xAB 表示A系统，0xBC 表示B系统  */
     private byte type;  
       
@@ -73,4 +73,12 @@ public class NettyMsg {
         this.body = body;  
     }  
   
+    /** 
+	 * 重写toString方法，方便打印日志
+	 */
+	@Override
+	public String toString() {
+		return "NettyMsg [type=" + type + ", flag=" + flag + ", length="
+				+ length + ", body=" + body + "]";
+	}
 }  

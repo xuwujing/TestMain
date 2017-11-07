@@ -31,6 +31,11 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/netty/netty-all-4.1.4.Final.jar" sourcepath="C:/Users/Administrator/.m2/repository/io/netty/netty-all/4.1.4.Final/netty-all-4.1.4.Final-sources.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/rabbitmq/amqp-client-4.0.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xom-1.2.10.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sql/sqlite-jdbc-3.20.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sql/c3p0-0.9.1.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sql/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/utils/guava-19.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/utils/joda-time-2.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>

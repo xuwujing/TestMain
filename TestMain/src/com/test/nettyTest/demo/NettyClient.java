@@ -40,8 +40,9 @@ public class NettyClient {
     }
     
     public static void star() throws IOException{
-    	String str="你好";
-    	ch.writeAndFlush(str+ "\r\n");
+    	String str="Hello Netty";
+    	ch.writeAndFlush(str);
+//    	ch.writeAndFlush(str+ "\r\n");
     	System.out.println("客户端发送数据:"+str);
    }
     	
