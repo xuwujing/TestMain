@@ -1,8 +1,7 @@
 package com.test.nioTest;
 /**
  * @author ZERO
- * @version 2017-5-10 锟斤拷锟斤拷11:35:51
- * 锟斤拷说锟斤拷
+ * @version 2017-5-10 
  */
 import java.io.File;
 import java.io.FileInputStream;

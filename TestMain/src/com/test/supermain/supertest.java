@@ -1,7 +1,5 @@
 package com.test.supermain;
 
-import com.test.supermain.supertest1.Father;
-import com.test.supermain.supertest1.Son;
 
 /**
  * @author ZERO
