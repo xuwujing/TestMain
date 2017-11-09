@@ -518,6 +518,34 @@ public final class MyTools {
 		return sb.toString();
     }
     
+    /**
+ 	 * json数据格式  key的首字母改小写
+ 	 * 例如 :
+ 	 * 入参:{"Abc":"123"}
+ 	 * 出参:{"abc":"123"}
+ 	 * @param str
+ 	 * @return
+ 	 */
+     @SuppressWarnings("rawtypes")
+ 	public static JSONObject changeKey(JSONObject json){
+     	 if(isEmpty(json)){
+     		return new JSONObject();
+     	 }
+     	JSONObject json1=new JSONObject();
+ 		  Iterator it=json.entrySet().iterator(); //定义迭代器
+ 		  String key="";
+ 		  String key1="";
+ 		  String key2="";
+ 		  while(it.hasNext()){
+ 			 Map.Entry  er= (Entry) it.next();
+ 			 key=er.getKey().toString();
+ 			 key1=key.substring(0,1).toLowerCase();
+ 			 key2=key.replaceFirst(key.substring(0,1), key1);
+ 			 json1.put(key2, er.getValue());
+ 		  }
+ 		 
+ 		return json1;
+     }
     
     /**
 	 * 将JDBC查询的数据转换成List类型
@@ -670,7 +698,14 @@ public final class MyTools {
 	    System.out.println("user:"+user);
 	    System.out.println("toBean:"+toBean(json2, User.class));
 	    System.out.println("toJSON:"+toJson(user));
-	
+	    
+	    JSONObject js=new JSONObject();
+	    js.put("Abc", "df");
+	    js.put("QWe", "dd");
+	    js.put("aa", "bb");
+	   System.out.println(changeKey(js));
+	    
+	    
 	}
 	
 }

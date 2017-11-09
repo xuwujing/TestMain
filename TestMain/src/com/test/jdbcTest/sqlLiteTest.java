@@ -78,7 +78,7 @@ public class sqlLiteTest {
 		try { 
 			if(null==sqllite||sqllite.isClosed()){  //如果为空或者连接关闭
 				try {
-					sqllite = (SQLiteConnection) DriverManager.getConnection(memory,null,null);//不使用用户名和密码	
+					sqllite = (SQLiteConnection) DriverManager.getConnection(db,null,null);//不使用用户名和密码	
 				} catch (SQLException e) {
 					logger.error("获取数据库连接失败！",e);
 				}			
@@ -93,12 +93,12 @@ public class sqlLiteTest {
 		creatTable();//创建有主键表     
 		creatTable1(); //创建无主键的表
 		long starTime=System.currentTimeMillis(); 
-		insertTable(10); //在有主键的表中, 插入100万数据
+		insertTable(100); //在有主键的表中, 插入100万数据
 		long endTime=System.currentTimeMillis(); 
-		System.out.println("在有主键的表插入100万数据总共使用时间为:"+(endTime-starTime)+"毫秒");
+		System.out.println("在有主键的表插入100数据总共使用时间为:"+(endTime-starTime)+"毫秒");
 	
 		long starTime1=System.currentTimeMillis(); 
-		insertTable1(1000001); //在没有主键的表中, 插入100万数据
+		insertTable1(100); //在没有主键的表中, 插入100万数据
 		long endTime1=System.currentTimeMillis(); 
 		System.out.println("在没有有主键的表插入100万数据总共使用时间为:"+(endTime1-starTime1)+"毫秒");
 		
@@ -155,7 +155,7 @@ public class sqlLiteTest {
 	private static void insertTable(int j){
 		try {
 			j4stmt=(JDBC4Statement) getLiteConnection().createStatement();
-			for(int i=1;i<j;i++){
+			for(int i=1;i<=j;i++){
 				String str="insert or ignore into test ( name,age,id) values('张三','20',"+i+");";
 //				String str="insert  into test ( name,age) values('张三',"+i+") where not exists(select 1 from test where id=2) ;";
 				 j4stmt.executeUpdate(str);
@@ -183,7 +183,7 @@ public class sqlLiteTest {
 	private static void insertTable1(int j){
 		try {
 			j4stmt=(JDBC4Statement) getLiteConnection().createStatement();
-			for(int i=1;i<j;i++){
+			for(int i=1;i<=j;i++){
 				String str="insert or ignore into test1 ( name,age,id) values('张三','30',"+i+");";
 				 j4stmt.executeUpdate(str);
 				}
