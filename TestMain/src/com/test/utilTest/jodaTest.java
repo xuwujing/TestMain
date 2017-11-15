@@ -67,7 +67,7 @@ public class jodaTest {
 			//是13号，并且是星期五
 			if(mdt.getDayOfMonth()==13&&mdt.getDayOfWeek()==5){
 				//打印出十年内所有的黑色星期五
-				System.out.println("星期五:"+mdt);
+				System.out.println("黑色星期五:"+mdt);
 				/*
 				 *  星期五:2018-04-13T09:13:40.551+08:00
 					星期五:2018-07-13T09:13:40.551+08:00

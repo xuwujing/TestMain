@@ -79,8 +79,7 @@ public final class MyTools {
 	 * 
 	 * @return boolean
 	 */
-	@SuppressWarnings("rawtypes")
-	public static boolean isEmpty(List list) {
+	public static boolean isEmpty(List<?> list) {
 		return (null == list || list.size() == 0);
 	}
 
@@ -90,8 +89,7 @@ public final class MyTools {
 	 * 
 	 * @return boolean
 	 */
-	@SuppressWarnings("rawtypes")
-	public static boolean isNotEmpty(List list) {
+	public static boolean isNotEmpty(List<?> list) {
 		return !isEmpty(list);
 	}
 
@@ -101,8 +99,7 @@ public final class MyTools {
 	 * 
 	 * @return boolean
 	 */
-	@SuppressWarnings("rawtypes")
-	public static boolean isEmpty(Map map) {
+	public static boolean isEmpty(Map<?,?> map) {
 		return (null == map || map.size()==0);
 	}
 	
@@ -112,8 +109,7 @@ public final class MyTools {
 	 * 
 	 * @return boolean
 	 */
-	@SuppressWarnings("rawtypes")
-	public static boolean isNotEmpty(Map map) {
+	public static boolean isNotEmpty(Map<?,?> map) {
 		return !isEmpty(map);
 	}
 	
@@ -260,7 +256,7 @@ public final class MyTools {
 	 * @return boolean
 	 * @throws ParseException 
 	 */
-    public static boolean compareDay(String time1,String time2,String format) {
+    public static boolean isCompareDay(String time1,String time2,String format) {
 		  if(isEmpty(format)){//如果没有设置格式使用默认格式
 				format=sdf;
 			}
@@ -528,21 +524,21 @@ public final class MyTools {
  	 */
      @SuppressWarnings("rawtypes")
  	public static JSONObject changeKey(JSONObject json){
-     	 if(isEmpty(json)){
+     	if(isEmpty(json)){
      		return new JSONObject();
-     	 }
-     	JSONObject json1=new JSONObject();
- 		  Iterator it=json.entrySet().iterator(); //定义迭代器
- 		  String key="";
- 		  String key1="";
- 		  String key2="";
- 		  while(it.hasNext()){
- 			 Map.Entry  er= (Entry) it.next();
- 			 key=er.getKey().toString();
- 			 key1=key.substring(0,1).toLowerCase();
- 			 key2=key.replaceFirst(key.substring(0,1), key1);
- 			 json1.put(key2, er.getValue());
- 		  }
+     	}
+	      JSONObject json1=new JSONObject();
+		  Iterator it=json.entrySet().iterator(); //定义迭代器
+		  String key="";
+		  String key1="";
+		  String key2="";
+	  while(it.hasNext()){
+		 Map.Entry  er= (Entry) it.next();
+		 key=er.getKey().toString();
+		 key1=key.substring(0,1).toLowerCase();
+		 key2=key.replaceFirst(key.substring(0,1), key1);
+		 json1.put(key2, er.getValue());
+	  }
  		 
  		return json1;
      }
@@ -601,7 +597,7 @@ public final class MyTools {
 	 * 本方法的测试示例
 	 * @param args
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes" })
 	public static void main(String[] args) {
 		/*
 		 * String 和List 空数据判断
@@ -611,8 +607,8 @@ public final class MyTools {
 		String str3=null;
 		String str4="a";
 		List list=null;
-		List list2=new ArrayList();
-		List list3=new ArrayList();
+		List<String> list2=new ArrayList<String>();
+		List<Object> list3=new ArrayList<Object>();
 		list3.add("a");
 		
 		System.out.println("str1 :"+isEmpty(str1));		//str1 :true
@@ -632,7 +628,7 @@ public final class MyTools {
 		System.out.println("getNowLongTime():"+getNowLongTime());  //getNowLongTime():1506419204920
 		System.out.println("getNowTime(sdfm):"+getNowTime(sdfm)); //getNowTime(sdfm):2017-09-26 17:46:44 920
 		System.out.println("当时时间向前推移30秒:"+ changeTime(-30,sdf,"s"));            //2017-09-26 17:46:14 
-		System.out.println("时间比较:"+compareDay(getNowTime(sdfm),changeTime(-30,sdf,"s"),"")); //时间比较:false
+		System.out.println("时间比较:"+isCompareDay(getNowTime(sdfm),changeTime(-30,sdf,"s"),"")); //时间比较:false
 		System.out.println("getTNowTime():"+getTNowTime());	//getTNowTime():2017-09-26 17:46:44.921
 		System.out.println("LongTime2StringTime():"+longTime2StringTime(start, sd)); //LongTime2StringTime():20170926174644
 		

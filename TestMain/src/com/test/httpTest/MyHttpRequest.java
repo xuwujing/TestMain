@@ -154,6 +154,8 @@ public class MyHttpRequest {
             // 发送POST请求必须设置如下两行
             conn.setDoOutput(true);
             conn.setDoInput(true);
+            // 建立实际的连接
+            conn.connect();
             // 获取URLConnection对象对应的输出流
             out = new PrintWriter(conn.getOutputStream());
             // 发送请求参数
@@ -198,10 +200,10 @@ public class MyHttpRequest {
 		map.put("ip", "218.4.255.255");
 		Map<String,Object> map1=new HashMap<String,Object>();
 		map1.put("a", "苏州市");
-		System.out.println("Get请求1:"+MyHttpRequest.sendGet(getUrl, param,"utf-8"));
-		System.out.println("Get请求2:"+MyHttpRequest.sendGet(getUrl, map,"utf-8"));
-		System.out.println("Post请求1:"+MyHttpRequest.sendPost(postUrl, param1,"utf-8"));
-		System.out.println("Post请求2:"+MyHttpRequest.sendPost(postUrl, map1,"utf-8"));
+		System.out.println("Get请求1:"+sendGet(getUrl, param,"utf-8"));
+		System.out.println("Get请求2:"+sendGet(getUrl, map,"utf-8"));
+		System.out.println("Post请求1:"+sendPost(postUrl, param1,"utf-8"));
+		System.out.println("Post请求2:"+sendPost(postUrl, map1,"utf-8"));
 	}
     
 }
