@@ -43,6 +43,11 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi/stax2-api-3.1.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi/poi-3.13-20150929.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi/poi-ooxml-3.13-20150929.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring/spring-aop-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring/spring-aspects-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring/spring-beans-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring/spring-context-4.1.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring/spring-core-4.1.0.RELEASE.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>

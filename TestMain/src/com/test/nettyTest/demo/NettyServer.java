@@ -28,10 +28,10 @@ public class NettyServer {
 	            b.group(group);
 	            b.channel(NioServerSocketChannel.class);
 	            b.childHandler(new NettyServerFilter()); //设置过滤器
-	            // 服务器绑定端口监听
+	            // 异步地绑定服务器；调用 sync()方法阻塞  等待直到绑定完成
 	            ChannelFuture f = b.bind(port).sync();
 	            System.out.println("服务端启动成功,端口是:"+port);
-	            // 监听服务器关闭监听
+	            // 获取 Channel 的  CloseFuture，并且阻塞当前线程直到它完成
 	            f.channel().closeFuture().sync();
 	        } finally {
 	            group.shutdownGracefully(); //关闭EventLoopGroup，释放掉所有资源包括创建的线程  
