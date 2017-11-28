@@ -6,9 +6,7 @@ package com.codetest;
  */
 public class TestBoolean {
 
-	/**
-	 * @param args
-	 */
+						
 	public static void main(String[] args) {
 		 {
 		        Boolean bool1 = Boolean.valueOf(true);       //这里均使用valueof创建对象，new创建的Boolean对象是不断的新创建一个实例对象，而valueOf则是返回Boolean类里的静态成员变量
