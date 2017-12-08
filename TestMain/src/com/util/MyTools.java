@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.test.pojoTest.User;
+import com.pancm.test.pojoTest.User;
 
 /**
  * 
