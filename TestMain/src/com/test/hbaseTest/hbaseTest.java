@@ -1,6 +1,7 @@
 package com.test.hbaseTest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.hadoop.conf.Configuration;
@@ -20,6 +21,8 @@ import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.util.Bytes;
+
+import com.alibaba.fastjson.JSONObject;
 /**
  * 
 * Title: hbaseTest
@@ -41,13 +44,16 @@ public class hbaseTest {
 	   // 获得配制文件对象
        conf = HBaseConfiguration.create(); 
        // 设置配置参数
-		conf.set("hbase.zookeeper.quorum", "192.169.0.25");
-//		conf.set("hbase.zookeeper.quorum", "192.169.1.144");
+		conf.set("hbase.zookeeper.quorum", "192.169.0.23");
 		conf.set("hbase.zookeeper.property.clientPort", "2181");  
+		//如果hbase是集群，这个必须加上 
+		//ip 和端口是在配置文件配置的
+		conf.set("hbase.master", "192.169.0.23:9001"); 
        try {
            con = ConnectionFactory.createConnection(conf);// 获得连接对象
        } catch (IOException e) {
            e.printStackTrace();
+           System.exit(1);
        }
    }
 	
@@ -90,7 +96,7 @@ public class hbaseTest {
 	}
 	
 	/**
-	 * 数据插入或更新
+	 * 数据单条插入或更新
 	 * @param tableName 	表名
 	 * @param rowKey   		行健  (主键)
 	 * @param family  		列族
@@ -107,6 +113,40 @@ public class hbaseTest {
 	            put.addColumn(Bytes.toBytes(family), Bytes.toBytes(qualifier),
 	 	                    Bytes.toBytes(value));
 	           t.put(put);
+//	          System.out.println(tableName+" 更新成功!");
+	        } catch (IOException e) {
+	        	System.out.println(tableName+" 更新失败!");
+	            e.printStackTrace();
+	        } finally {
+	            close();
+	       }
+	}
+	
+	
+	/**
+	 * 数据批量插入或更新
+	 * @param tableName 	表名
+	 * @param list   		hbase的数据
+	 * @return
+	 */
+	public static void insertBatch(String tableName,List<?> list){
+		 if(null==tableName||null==list||list.size()==0){
+			 return;
+		 }
+		 Table t=null;	
+		 Put put=null;
+		 JSONObject json=null;
+		 List<Put> puts=new ArrayList<Put>();
+		try {
+	            t = con.getTable(TableName.valueOf(tableName));
+	            for(int i=0,j=list.size();i<j;i++){
+	            	json=(JSONObject) list.get(i);
+	                put = new Put(Bytes.toBytes(json.getString("rowKey")));
+	  	            put.addColumn(Bytes.toBytes(json.getString("family")), Bytes.toBytes(json.getString("qualifier")),
+	  	 	                    Bytes.toBytes(json.getString("value")));
+	  	           puts.add(put);
+	            }
+	           t.put(puts);
 	          System.out.println(tableName+" 更新成功!");
 	        } catch (IOException e) {
 	        	System.out.println(tableName+" 更新失败!");
@@ -167,7 +207,7 @@ public class hbaseTest {
 		Table t =null;
 		 try {
 			 t = con.getTable(TableName.valueOf(tableName));
-			// get
+			// 通过HBase中的 get来进行查询
 			Get get = new Get(Bytes.toBytes(rowKey));
 			if(null!=family&&family.length()>0){
 				if(null!=qualifier&&qualifier.length()>0){
@@ -178,11 +218,14 @@ public class hbaseTest {
 			}
 			Result r = t.get(get);
 			List<Cell> cs = r.listCells();
+			if(null==cs||cs.size()==0){
+				return;
+			}
 				for (Cell cell : cs) {
 					String rowKey1 = Bytes.toString(CellUtil.cloneRow(cell)); // 取行键
 					long timestamp = cell.getTimestamp(); // 取到时间戳
 					String family1 = Bytes.toString(CellUtil.cloneFamily(cell)); // 取到族列
-					String qualifier1 = Bytes.toString(CellUtil.cloneQualifier(cell)); // 取到修饰名
+					String qualifier1 = Bytes.toString(CellUtil.cloneQualifier(cell)); // 取到列
 					String value = Bytes.toString(CellUtil.cloneValue(cell)); // 取到值
 					System.out.println("通过条件查询:"+" ===> rowKey : " + rowKey1
 							+ ",  timestamp : " + timestamp + ", family : "
@@ -211,13 +254,38 @@ public class hbaseTest {
 		}
     }
     
-    
-
+   /**
+    * 批量测试方法
+    * @param tableName  表名
+    * @param family  列族
+    * @param qualifier  列
+    * @param value  值
+    * @param k		           次数
+    */
+   public static void insterTest(String tableName,String family,String qualifier,String value, int k){
+	   List<JSONObject> list =new ArrayList<>();
+		for(int i=1;i<=k;i++){
+			JSONObject json =new JSONObject();
+			json.put("rowKey", i);              //行健
+			json.put("family", family);	 		 //列族
+			json.put("qualifier", qualifier);		 //列
+			if("t_student".equals(tableName)){ //如果是t_student 姓名则加上编号
+				json.put("value", value+i);	//值
+			}else if("".equals(value)){		 //如果为空，则是年龄	
+				json.put("value", i);	//值
+			}else{							  //否则就是性别
+				json.put("value", value);	//值
+			}
+		
+			list.add(json);
+		}
+		insertBatch(tableName,list);
+   }
     
     
 		public static void main(String[] args) {
-//			test();
-			test1();
+			test();
+//			test1();
 		}
 
 
@@ -226,27 +294,28 @@ public class hbaseTest {
 	 * 一些测试
 	 */
 	private static void test() {
-		String tableName1="t_student",tableName2="t_class",tableName3="t_grade",tableName4="t_subject";
+		String tableName1="t_student",tableName2="t_student_info";
 		String []columnFamily1={"st1","st2"};
-		String []columnFamily2={"cl1","cl2"};
-		String []columnFamily3={"gr1","gr2"};
-		String []columnFamily4={"su1","su2"};
-//		creatTable(tableName1,columnFamily1);
-//		creatTable(tableName2,columnFamily2);
-//		creatTable(tableName3,columnFamily3);
-//		creatTable(tableName4,columnFamily4);
-		String rowKey1="rowkey1",rowKey2="rowkey2",rowKey3="rowkey3",rowKey4="rowkey4";
-		String column1="column1",column2="column2",column3="column3",column4="column4"; 
-		String value1="value1",value2="value2",value3="value3",value4="value4";
+		String []columnFamily2={"stf1","stf2"};
+		String rowKey1="1001",rowKey2="";
+		String column1="cl1",column2="cl2",column3="clf1",column4="clf2"; 
+		String value1="zhangsan",value2="",value3="man";
 		
-//		insert(tableName1,rowKey1,columnFamily1[0],column1,value1);
+		long starTime=System.currentTimeMillis(); 
+		//在t_student 插入100万数据
+		insterTest(tableName1,columnFamily1[0],column1,value1,1000001);
+		//在t_student_info 插入100万数据
+//		insterTest(tableName2,columnFamily2[0],column3,value2,1000001);
+//		insterTest(tableName2,columnFamily2[1],column4,value3,1000001);		
+		long endTime=System.currentTimeMillis(); 
+    	System.out.println("插入数据共使用时间为:"+(endTime-starTime)+"毫秒");
+		
+//		
 //		insert(tableName1,rowKey1,columnFamily1[0],column2,value2);
 //		insert(tableName1,rowKey1,columnFamily1[1],column3,value3);
 //		insert(tableName1,rowKey1,columnFamily1[1],column4,value4);
-		select(tableName1);
-		select(tableName1,rowKey1,"","");
-		select(tableName1,rowKey1,columnFamily1[1],"");
-		select(tableName1,rowKey1,columnFamily1[0],column1);
+//		select(tableName1);
+//		select(tableName1,rowKey1,"","");
 	}
 	
 	
@@ -257,9 +326,11 @@ public class hbaseTest {
 	private static void test1() {
 		//定义一个大表
 		String tableName="t";
+//		String tableName="hive_hbase_test";
+//		String tableName="t_student";
 		//将关系型数据的表对应成列族 
 		String []columnFamily={"t_student","t_class","t_grade","t_subject"};
-// 		creatTable(tableName,columnFamily);
+ 		creatTable(tableName,columnFamily);
         //设置列键(主键，可以一对多)
  		String rowKey1="1",rowKey2="2",rowKey3="3",rowKey4="4";
 		//将关系型数据库表字段对应成列
@@ -268,16 +339,27 @@ public class hbaseTest {
  		String id1="1001",name1="张三",age1="18";
  		String id2="1002",name2="李四",age2="20";
 		
+// 		insert(tableName,"101","t_hive_hbase_test","uid","101");
+ 		
 		insert(tableName,rowKey1,columnFamily[0],id,id1);
 		insert(tableName,rowKey1,columnFamily[0],name,name1);
 		insert(tableName,rowKey1,columnFamily[0],age,age1);
+		insert(tableName,rowKey1,columnFamily[1],id,id1);
+		insert(tableName,rowKey1,columnFamily[1],name,name1);
+		insert(tableName,rowKey1,columnFamily[1],age,age1);
+		
 		insert(tableName,rowKey2,columnFamily[0],id,id2);
 		insert(tableName,rowKey2,columnFamily[0],name,name2);
 		insert(tableName,rowKey2,columnFamily[0],age,age2);
-	
+		insert(tableName,rowKey3,columnFamily[3],id,id1);
+		insert(tableName,rowKey3,columnFamily[3],name,name1);
+		insert(tableName,rowKey3,columnFamily[3],age,age1);
+ 		long starTime=System.currentTimeMillis(); 
 		select(tableName);
-		select(tableName,rowKey1,"","");
+		select(tableName,"1001","","");
 		select(tableName,rowKey1,columnFamily[0],"");
 		select(tableName,rowKey1,columnFamily[0],id);
+		long endTime=System.currentTimeMillis(); 
+    	System.out.println("查询共使用时间为:"+(endTime-starTime)+"毫秒");
 	}
 }

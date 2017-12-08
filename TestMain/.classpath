@@ -86,5 +86,9 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sql/mysql-connector-java-5.1.41.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sql/sqlite-jdbc-3.20.0.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sql/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spark/spark-sql_2.11-2.2.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spark/spark-catalyst_2.11-2.2.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spark/spark-core_2.11-2.2.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spark/scala-library-2.11.8.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

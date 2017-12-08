@@ -22,8 +22,16 @@ import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.util.Bytes;
-
+/**
+ * 
+* Title: hbaseTest
+* Description: hbase的一些测试
+* Version:1.0.0  
+* @author pancm
+* @date 2017年11月23日
+ */
 public class MyHbaseApi {
+
 
 	public static void main(String[] args) {
 		Admin admin = null;
@@ -32,12 +40,11 @@ public class MyHbaseApi {
 		try {
 			// 1.获得配置文件对象
 			Configuration conf = HBaseConfiguration.create();
-			// 设置配置参数
-			conf.set("hbase.zookeeper.quorum", "192.169.0.23");
-//			conf.set("hbase.zookeeper.quorum", "hserver1");
-//			conf.set("hbase.zookeeper.quorum", "localhost");
-			conf.set("hbase.zookeeper.property.clientPort", "2181");  
-//			conf.set("hbase.master", "192.169.0.23:9001"); 
+			/* 设置配置参数 
+			 * hserver3 从本地的hosts中读取 路径(C:\WINDOWS\system32\drivers\etc)
+			 */
+			conf.set("hbase.zookeeper.quorum", "hserver3");
+			conf.set("hbase.zookeeper.property.clientPort", "2181");
 			// 2.建立连接
 			con = ConnectionFactory.createConnection(conf);
 			// 3.获得会话
@@ -119,7 +126,7 @@ public class MyHbaseApi {
 					// 取到值
 					String value = Bytes.toString(CellUtil.cloneValue(cell));
 
-					System.out.println(" ===> rowKey : " + rowKey
+					System.out.println("1 ===> rowKey : " + rowKey
 							+ ",  timestamp : " + timestamp + ", family : "
 							+ family + ", qualifier : " + qualifier
 							+ ", value : " + value);
@@ -141,22 +148,20 @@ public class MyHbaseApi {
 						.toString(CellUtil.cloneQualifier(cell)); // 取到修饰名
 				String value = Bytes.toString(CellUtil.cloneValue(cell)); // 取到值
 
-				System.out.println(" ===> rowKey : " + rowKey
+				System.out.println("2 ===> rowKey : " + rowKey
 						+ ",  timestamp : " + timestamp + ", family : "
 						+ family + ", qualifier : " + qualifier + ", value : "
 						+ value);
 			}
 
 			// 删除数据
-			System.out
-					.println(" ===================delete删除数据==================");
+			System.out.println(" ===================delete删除数据==================");
 			Delete delete = new Delete(Bytes.toBytes("row02"));
 			delete.addColumn(Bytes.toBytes("fm2"), Bytes.toBytes("col2"));
 			Table t05 = con.getTable(tn);
 			t05.delete(delete);
 
-			System.out
-					.println(" ===================delete删除数据后==================");
+			System.out.println(" ===================delete删除数据后==================");
 			// scan
 			scan = new Scan();
 			table03 = con.getTable(tn); // 获得表对象
@@ -171,7 +176,7 @@ public class MyHbaseApi {
 							.cloneQualifier(cell)); // 取到修饰名
 					String value = Bytes.toString(CellUtil.cloneValue(cell)); // 取到值
 
-					System.out.println(" ===> rowKey : " + rowKey
+					System.out.println("3 ===> rowKey : " + rowKey
 							+ ",  timestamp : " + timestamp + ", family : "
 							+ family + ", qualifier : " + qualifier
 							+ ", value : " + value);
